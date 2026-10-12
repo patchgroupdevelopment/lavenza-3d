@@ -42,6 +42,7 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 12.5px; line-height: 1.5;
   color: var(--muted); backdrop-filter: blur(8px); }
 .help b { color: var(--ink); font-weight: 600; }
+.help .x { display: block; margin-top: 6px; font: 600 12px var(--ui); color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; }
 .pad { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); display: grid;
   grid-template-columns: repeat(3, 46px); grid-template-rows: repeat(2, 46px); gap: 6px; }
 .pad button { padding: 0; border-radius: 12px; font-size: 18px; user-select: none; -webkit-user-select: none; touch-action: none; }
@@ -49,7 +50,7 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .pad .r { grid-column: 3; grid-row: 2; }
 .tog { position: fixed; right: 16px; top: calc(62px + env(safe-area-inset-top, 0px)); font-size: 12px; padding: 6px 11px; }
 .pad[hidden] { display: none !important; }
-@media (max-width: 640px) { .brand span { display: none; } .help { max-width: calc(100% - 210px); font-size: 11.5px; } }
+@media (max-width: 640px) { .brand span { display: none; } .help { max-width: calc(100% - 200px); font-size: 11px; padding: 8px 10px; } }
 </style>
 </head>
 <body>
@@ -60,7 +61,8 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 </div>
 <button class="tog" id="ceil" type="button" aria-pressed="false">Tavanı gizlət</button>
 <div class="help" id="help"><b>Baxmaq:</b> ekranı sürüşdürün. <b>Yerimək:</b> W A S D və ya oxlar, telefonda sağdakı düymələr.
-Arxa zonanın qapısı və giriş qapısı açıqdır, içindən keçmək olar. <b>Yuxarıdan</b> görünüşdə fırladın, təkərlə yaxınlaşdırın.</div>
+Arxa zonanın qapısı və giriş qapısı açıqdır, içindən keçmək olar. <b>Yuxarıdan</b> görünüşdə fırladın, təkərlə yaxınlaşdırın.
+<button class="x" id="helpx" type="button">Bağla</button></div>
 <div class="pad" id="pad" aria-label="Hərəkət">
   <button class="f" type="button" data-k="f" aria-label="İrəli">&#9650;</button>
   <button class="l" type="button" data-k="l" aria-label="Sola dön">&#8630;</button>
@@ -226,6 +228,7 @@ const DATA = {"W":1145,"D":1173,"H":390,"mats":[["Parket palıd","#C8955F",1.0],
       camera.lookAt(c);
     }
   }
+  document.getElementById('helpx').addEventListener('click', () => { document.getElementById('help').hidden = true; });
   const ceilBtn = document.getElementById('ceil');
   function setCeiling(hidden) { ceiling.visible = !hidden; ceilBtn.setAttribute('aria-pressed', String(hidden));
     ceilBtn.textContent = hidden ? 'Tavanı göstər' : 'Tavanı gizlət'; }
